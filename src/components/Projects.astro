@@ -71,10 +71,10 @@ const projects = [
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
       {projects.map((project, i) => (
         <button
-          class={`project-card group w-full cursor-pointer rounded-2xl border border-border bg-surface p-6 text-left transition-all hover:border-accent/40 ${i < 3 ? 'lg:col-span-2' : 'lg:col-span-3'}`}
+          class={`project-card group w-full cursor-pointer rounded-2xl border border-border bg-surface p-6 text-left transition-all hover:border-accent/40 lg:col-span-2 ${i === 3 ? 'lg:col-start-2' : ''}`}
           data-index={String(i)}
         >
-          <div class="mb-4 flex items-center justify-between">
+          <div class="mb-4 flex items-start justify-between">
             <span class="text-2xl font-bold text-accent/40">{project.number}</span>
             <span class="rounded-full border border-accent/30 bg-accent/10 px-2.5 py-0.5 text-xs font-medium text-accent">
               {project.tag}
