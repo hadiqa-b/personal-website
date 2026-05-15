@@ -27,14 +27,15 @@ const stats = [
       I build production ML and AI systems that make decisions at scale.
     </p>
 
-    <ul class="mb-16 space-y-2">
+    <div class="mb-16 grid gap-6 sm:grid-cols-3">
       {stats.map(stat => (
-        <li class="flex items-baseline gap-2 text-sm text-gray-400">
-          <span class="text-accent">ᯓ★</span>
-          <span><span class="font-bold text-accent">{stat.number}</span> {stat.label}</span>
-        </li>
+        <div class="rounded-xl border border-border bg-surface p-6 text-center">
+          <p class="text-sm leading-relaxed text-gray-400">
+            <span class="font-bold text-accent text-base">{stat.number}</span> {stat.label}
+          </p>
+        </div>
       ))}
-    </ul>
+    </div>
 
     <p class="max-w-3xl text-base leading-relaxed text-gray-300">
       Hi there! I'm a data scientist / ML engineer at <span class="font-semibold text-accent-hover">Dubizzle Labs</span>, where I design and ship ML/AI systems that run in <span class="font-semibold text-accent-hover">production every day</span>. My work spans <span class="font-semibold text-accent-hover">reinforcement learning</span>, <span class="font-semibold text-accent-hover">LLM-powered agents</span>, <span class="font-semibold text-accent-hover">NLP</span>, and <span class="font-semibold text-accent-hover">ML-driven pricing</span>, always with a focus on solving real business problems and measuring what changed. I've taken projects from <span class="font-semibold text-accent-hover">first research to production deployment</span>, built services from the ground up, and presented directly to stakeholders up to the CEO.
