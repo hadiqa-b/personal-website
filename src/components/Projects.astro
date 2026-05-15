@@ -1,0 +1,102 @@
+---
+const projects = [
+  {
+    number: '01',
+    title: 'Intelligent Client-to-Agent Allocation',
+    tag: 'Reinforcement Learning',
+    context: 'Dubizzle Labs · Live across MENA and Pakistan',
+    problem: 'The company needed a way to intelligently match incoming clients to sales agents. The existing system was a hand-coded scoring policy that concentrated clients on a small set of agents and was painful to change.',
+    built: 'I pulled production data and found it was falsifiable in places (agents gaming metrics), which ruled out supervised learning. After several failed prototypes and a deep research phase, I designed a contextual multi-armed bandit system, adapting the DiagUCB formulation into a hybrid of UCB and Thompson sampling. The system clusters clients by behavioural scores (evaluated by an LLM), runs three parallel bandits (one per cluster), and produces a final match score weighted by the client\'s cluster distribution.',
+    built2: 'I also built the full production service: FastAPI, async SQLAlchemy on MySQL, Celery + Redis for async jobs, New Relic for observability, and Dockerized deploys via GitHub Actions. After launch, I diagnosed that reward events were too rare for meaningful reinforcement, so I decomposed the reward signal into finer-grained events, lifting the reward event rate from 21% to 84%.',
+    result: 'Live in production, matching ~30,000 clients across 1,500+ agents daily. The POC presentation drove direct CEO recognition to engineering leadership.',
+    stack: ['Python', 'NumPy', 'scikit-learn', 'Custom UCB + Thompson Sampling', 'FastAPI', 'SQLAlchemy + MySQL', 'Celery + Redis', 'New Relic', 'Docker', 'GitHub Actions'],
+  },
+  {
+    number: '02',
+    title: 'AI Dynamic Pricing',
+    tag: 'ML Systems',
+    context: 'Dubizzle Labs · POC with controlled rollout proposed',
+    problem: 'An e-commerce marketplace monetizes through ad-visibility packages. Pricing was a once-a-year, top-down exercise. With 200,000+ category × attribute combinations, that approach structurally cannot capture demand differences at the attribute level.',
+    built: 'A model that produces price recommendations daily at the lowest meaningful unit (leaf category combined with item attributes) using live demand signals. The system is deliberately conservative: it tests small price increases at the margin, measures the net effect (revenue gained vs. churn), and stops or reverts when upside disappears.',
+    built2: 'In the pilot category, only 26 of 21,427 candidate cases received a recommended price change, a 0.12% recommendation rate. The system surfaces only high-confidence opportunities, not blanket increases.',
+    result: 'December back-test produced ~$170K monthly revenue uplift. Six-month projection: ~$1.15M cumulative uplift (95% CI: $646K–$1.65M).',
+    stack: ['Python', 'pandas', 'NumPy', 'scikit-learn', 'Statistical Significance Testing', 'FastAPI'],
+  },
+  {
+    number: '03',
+    title: 'Multi-Tenant WhatsApp AI Sales Agent',
+    tag: 'LLM Agents',
+    context: 'Dubizzle Labs · Live in production, Saudi real estate market',
+    problem: 'The business needed an AI agent that could autonomously engage potential real estate investors over WhatsApp: qualify them, present relevant projects, and book consultation meetings, all without human intervention.',
+    built: 'I built the agent end-to-end on a multi-tenant, multi-agent platform. The architecture uses LangChain\'s tool-use agent pattern (GPT-4o-mini) with custom tools: a real estate projects search API, a CRM conversation submission endpoint, currency conversion, and timezone-aware meeting scheduling.',
+    built2: 'I engineered bidirectional state tracking between the LLM and the server. For meeting bookings, I built a dual-safeguard system so that if the LLM skips the CRM submission, the server catches it and fires the submission anyway. I also built the multi-tenant WebSocket layer for the WhatsApp Business API with automatic token refresh and reconnect handling.',
+    result: 'Live in production, handling thousands of investor conversations weekly across multiple markets. Agent behaviour is fully DB-driven, changeable without redeployment.',
+    stack: ['Python', 'FastAPI', 'LangChain + GPT-4o-mini', 'SQLAlchemy + PostgreSQL', 'Redis', 'WebSocket', 'Docker', 'GitHub Actions'],
+  },
+  {
+    number: '04',
+    title: 'Project Name Extraction from Call Transcripts',
+    tag: 'NLP / NER',
+    context: 'Dubizzle Labs · Shipped to production',
+    problem: 'An AI transcription pipeline processed Urdu sales calls via Whisper. The project-name extraction field was only 37% accurate due to background noise, mid-call cut-offs, and Urdu pronunciation issues.',
+    built: 'A custom spaCy NER model trained on the company\'s own call transcripts, wrapped as a FastAPI service. On top, I added a fuzzy matching layer fed by an uploadable list of canonical project names. The fuzzy matcher catches close matches deterministically, and the NER model handles anything it misses.',
+    built2: '',
+    result: 'Lifted project-name extraction accuracy from 37% to 84%, enabling per-project cost-of-calling reporting that stakeholders previously didn\'t have.',
+    stack: ['Python', 'spaCy (Custom NER)', 'FuzzyWuzzy', 'FastAPI', 'Whisper'],
+  },
+  {
+    number: '05',
+    title: 'Semantic Search Engine for Restaurant Recommendations',
+    tag: 'Semantic Search',
+    context: 'Contract role · Shipped to production',
+    problem: 'Users type natural-language queries like "cozy ramen spot" or "cheap brunch place" and the system needed to retrieve semantically relevant restaurants, not just keyword matches.',
+    built: 'SBERT embeddings represent restaurants and queries in a shared semantic space, stored in pgvector with HNSW indexing for sub-linear approximate nearest-neighbor retrieval at scale. I built an NLP-based noun-pair extraction step that pulls salient (modifier, head) pairs from free-text queries so the embedding step prioritises semantically meaningful tokens over filler words.',
+    built2: '',
+    result: 'Faster retrieval and materially better precision on natural-language queries compared to baseline keyword search. Deployed to production.',
+    stack: ['Python', 'SBERT', 'pgvector (HNSW)', 'NLP Noun-pair Extraction'],
+  },
+];
+---
+
+<section id="work" class="px-6 py-24">
+  <div class="mx-auto max-w-5xl">
+    <h2 class="mb-4 text-sm font-medium tracking-wider text-accent uppercase">Selected Work</h2>
+    <p class="mb-12 text-gray-400">Projects taken from research to production.</p>
+
+    <div class="space-y-8">
+      {projects.map(project => (
+        <div class="group rounded-2xl border border-border bg-surface p-8 transition-colors hover:border-accent/40">
+          <div class="mb-6">
+            <span class="mr-3 text-3xl font-bold text-accent/40">{project.number}</span>
+            <h3 class="mt-2 text-xl font-bold text-white sm:text-2xl">{project.title}</h3>
+            <span class="mt-3 inline-block rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-medium text-accent">
+              {project.tag}
+            </span>
+          </div>
+
+          <p class="mb-4 text-xs font-medium tracking-wider text-gray-500 uppercase">{project.context}</p>
+
+          <div class="mb-6 space-y-4">
+            <p class="text-sm leading-relaxed text-gray-400">{project.problem}</p>
+            <p class="text-sm leading-relaxed text-gray-300">{project.built}</p>
+            {project.built2 && (
+              <p class="text-sm leading-relaxed text-gray-300">{project.built2}</p>
+            )}
+          </div>
+
+          <div class="mb-6 rounded-lg border border-accent/20 bg-accent/5 px-5 py-3">
+            <p class="text-sm font-medium text-accent-hover">{project.result}</p>
+          </div>
+
+          <div class="flex flex-wrap gap-2">
+            {project.stack.map(tech => (
+              <span class="rounded-md bg-gray-800 px-2.5 py-1 text-xs text-gray-400">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,42 @@
+---
+const categories = [
+  {
+    name: 'ML & AI',
+    items: ['Python', 'NumPy', 'pandas', 'scikit-learn', 'Reinforcement Learning', 'LangChain', 'OpenAI API', 'spaCy', 'SBERT', 'pgvector', 'K-Means'],
+  },
+  {
+    name: 'Backend & APIs',
+    items: ['FastAPI', 'Uvicorn', 'Pydantic', 'SQLAlchemy', 'PostgreSQL', 'MySQL', 'Alembic', 'Celery', 'Redis', 'WebSocket', 'httpx'],
+  },
+  {
+    name: 'Infrastructure & DevOps',
+    items: ['Docker', 'GitHub Actions', 'PM2', 'New Relic', 'Dynaconf', 'Structured Logging'],
+  },
+  {
+    name: 'Other',
+    items: ['Statistical Testing', 'Bayesian Estimation (MCMC)', 'EDA', 'LLM Prompt Engineering', 'Bilingual NLP', 'R'],
+  },
+];
+---
+
+<section id="stack" class="px-6 py-24">
+  <div class="mx-auto max-w-5xl">
+    <h2 class="mb-4 text-sm font-medium tracking-wider text-accent uppercase">Stack</h2>
+    <p class="mb-12 text-gray-400">Technologies I work with regularly.</p>
+
+    <div class="grid gap-8 sm:grid-cols-2">
+      {categories.map(cat => (
+        <div class="rounded-xl border border-border bg-surface p-6">
+          <h3 class="mb-4 text-sm font-semibold text-white">{cat.name}</h3>
+          <div class="flex flex-wrap gap-2">
+            {cat.items.map(item => (
+              <span class="rounded-md border border-border bg-gray-800/50 px-3 py-1.5 text-xs text-gray-300">
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import WhatIDo from '../components/WhatIDo.astro';
+import Projects from '../components/Projects.astro';
+import TechStack from '../components/TechStack.astro';
+import Publication from '../components/Publication.astro';
+import About from '../components/About.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Hadiqa Basit — ML Engineer & Data Scientist"
+  description="I build production ML and AI systems that make decisions at scale. Reinforcement learning, LLM agents, NLP, and ML-driven pricing."
+>
+  <Navbar />
+  <main>
+    <Hero />
+    <WhatIDo />
+    <Projects />
+    <TechStack />
+    <Publication />
+    <About />
+  </main>
+  <Footer />
+</Layout>

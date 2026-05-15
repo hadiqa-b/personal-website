@@ -1,0 +1,44 @@
+---
+const stats = [
+  {
+    number: '30,000',
+    label: 'clients matched daily across 1,500+ sales agents using a reinforcement learning system designed from scratch',
+  },
+  {
+    number: '200,000+',
+    label: 'product combinations with automated pricing decisions, replacing a once-a-year manual process with daily recommendations',
+  },
+  {
+    number: "1000's",
+    label: 'of investor conversations handled weekly by a WhatsApp AI sales agent built end-to-end across multiple markets',
+  },
+];
+---
+
+<section class="relative flex min-h-screen flex-col justify-center px-6 pt-20">
+  <div class="mx-auto w-full max-w-5xl">
+    <p class="mb-4 text-sm font-medium tracking-wider text-accent uppercase">ML Engineer & Data Scientist</p>
+
+    <h1 class="mb-6 text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+      Hadiqa Basit
+    </h1>
+
+    <p class="mb-12 max-w-2xl text-lg leading-relaxed text-gray-400 sm:text-xl">
+      I build production ML and AI systems that make decisions at scale.
+    </p>
+
+    <div class="mb-16 grid gap-6 sm:grid-cols-3">
+      {stats.map(stat => (
+        <div class="rounded-xl border border-border bg-surface p-6">
+          <p class="text-sm leading-relaxed text-gray-400">
+            <span class="font-bold text-accent text-base">{stat.number}</span> {stat.label}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <p class="max-w-3xl text-base leading-relaxed text-gray-300">
+      Hi there! I'm a data scientist / ML engineer at <span class="font-semibold text-accent-hover">Dubizzle Labs</span>, where I design and ship ML/AI systems that run in <span class="font-semibold text-accent-hover">production every day</span>. My work spans <span class="font-semibold text-accent-hover">reinforcement learning</span>, <span class="font-semibold text-accent-hover">LLM-powered agents</span>, <span class="font-semibold text-accent-hover">NLP</span>, and <span class="font-semibold text-accent-hover">ML-driven pricing</span>, always with a focus on solving real business problems and measuring what changed. I've taken projects from <span class="font-semibold text-accent-hover">first research to production deployment</span>, built services from the ground up, and presented directly to stakeholders up to the CEO.
+    </p>
+  </div>
+</section>
