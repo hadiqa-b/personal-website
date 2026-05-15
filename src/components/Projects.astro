@@ -5,9 +5,10 @@ const projects = [
     title: 'Intelligent Client-to-Agent Allocation',
     tag: 'Reinforcement Learning',
     context: 'Dubizzle Labs · Live across MENA and Pakistan',
+    summary: 'RL system matching 30,000 clients to 1,500+ sales agents daily, built from scratch.',
     problem: 'The company needed a way to intelligently match incoming clients to sales agents. The existing system was a hand-coded scoring policy that concentrated clients on a small set of agents and was painful to change.',
-    built: 'I pulled production data and found it was falsifiable in places (agents gaming metrics), which ruled out supervised learning. After several failed prototypes and a deep research phase, I designed a contextual multi-armed bandit system, adapting the DiagUCB formulation into a hybrid of UCB and Thompson sampling. The system clusters clients by behavioural scores (evaluated by an LLM), runs three parallel bandits (one per cluster), and produces a final match score weighted by the client\'s cluster distribution.',
-    built2: 'I also built the full production service: FastAPI, async SQLAlchemy on MySQL, Celery + Redis for async jobs, New Relic for observability, and Dockerized deploys via GitHub Actions. After launch, I diagnosed that reward events were too rare for meaningful reinforcement, so I decomposed the reward signal into finer-grained events, lifting the reward event rate from 21% to 84%.',
+    built: "I pulled production data and found it was falsifiable in places (agents gaming metrics), which ruled out supervised learning. After several failed prototypes and a deep research phase, I designed a contextual multi-armed bandit system, adapting the DiagUCB formulation into a hybrid of UCB and Thompson sampling. The system clusters clients by behavioural scores (evaluated by an LLM), runs three parallel bandits (one per cluster), and produces a final match score weighted by the client's cluster distribution.",
+    built2: "I also built the full production service: FastAPI, async SQLAlchemy on MySQL, Celery + Redis for async jobs, New Relic for observability, and Dockerized deploys via GitHub Actions. After launch, I diagnosed that reward events were too rare for meaningful reinforcement, so I decomposed the reward signal into finer-grained events, lifting the reward event rate from 21% to 84%.",
     result: 'Live in production, matching ~30,000 clients across 1,500+ agents daily. The POC presentation drove direct CEO recognition to engineering leadership.',
     stack: ['Python', 'NumPy', 'scikit-learn', 'Custom UCB + Thompson Sampling', 'FastAPI', 'SQLAlchemy + MySQL', 'Celery + Redis', 'New Relic', 'Docker', 'GitHub Actions'],
   },
@@ -16,6 +17,7 @@ const projects = [
     title: 'AI Dynamic Pricing',
     tag: 'ML Systems',
     context: 'Dubizzle Labs · POC with controlled rollout proposed',
+    summary: 'ML pricing engine covering 200,000+ product combinations, replacing a once-a-year manual process.',
     problem: 'An e-commerce marketplace monetizes through ad-visibility packages. Pricing was a once-a-year, top-down exercise. With 200,000+ category × attribute combinations, that approach structurally cannot capture demand differences at the attribute level.',
     built: 'A model that produces price recommendations daily at the lowest meaningful unit (leaf category combined with item attributes) using live demand signals. The system is deliberately conservative: it tests small price increases at the margin, measures the net effect (revenue gained vs. churn), and stops or reverts when upside disappears.',
     built2: 'In the pilot category, only 26 of 21,427 candidate cases received a recommended price change, a 0.12% recommendation rate. The system surfaces only high-confidence opportunities, not blanket increases.',
@@ -27,9 +29,10 @@ const projects = [
     title: 'Multi-Tenant WhatsApp AI Sales Agent',
     tag: 'LLM Agents',
     context: 'Dubizzle Labs · Live in production, Saudi real estate market',
+    summary: 'End-to-end WhatsApp AI agent qualifying investors, presenting projects, and booking meetings autonomously.',
     problem: 'The business needed an AI agent that could autonomously engage potential real estate investors over WhatsApp: qualify them, present relevant projects, and book consultation meetings, all without human intervention.',
-    built: 'I built the agent end-to-end on a multi-tenant, multi-agent platform. The architecture uses LangChain\'s tool-use agent pattern (GPT-4o-mini) with custom tools: a real estate projects search API, a CRM conversation submission endpoint, currency conversion, and timezone-aware meeting scheduling.',
-    built2: 'I engineered bidirectional state tracking between the LLM and the server. For meeting bookings, I built a dual-safeguard system so that if the LLM skips the CRM submission, the server catches it and fires the submission anyway. I also built the multi-tenant WebSocket layer for the WhatsApp Business API with automatic token refresh and reconnect handling.',
+    built: "I built the agent end-to-end on a multi-tenant, multi-agent platform. The architecture uses LangChain's tool-use agent pattern (GPT-4o-mini) with custom tools: a real estate projects search API, a CRM conversation submission endpoint, currency conversion, and timezone-aware meeting scheduling.",
+    built2: "I engineered bidirectional state tracking between the LLM and the server. For meeting bookings, I built a dual-safeguard system so that if the LLM skips the CRM submission, the server catches it and fires the submission anyway. I also built the multi-tenant WebSocket layer for the WhatsApp Business API with automatic token refresh and reconnect handling.",
     result: 'Live in production, handling thousands of investor conversations weekly across multiple markets. Agent behaviour is fully DB-driven, changeable without redeployment.',
     stack: ['Python', 'FastAPI', 'LangChain + GPT-4o-mini', 'SQLAlchemy + PostgreSQL', 'Redis', 'WebSocket', 'Docker', 'GitHub Actions'],
   },
@@ -38,10 +41,11 @@ const projects = [
     title: 'Project Name Extraction from Call Transcripts',
     tag: 'NLP / NER',
     context: 'Dubizzle Labs · Shipped to production',
+    summary: 'Custom NER pipeline lifting extraction accuracy from 37% to 84% on Urdu call transcripts.',
     problem: 'An AI transcription pipeline processed Urdu sales calls via Whisper. The project-name extraction field was only 37% accurate due to background noise, mid-call cut-offs, and Urdu pronunciation issues.',
-    built: 'A custom spaCy NER model trained on the company\'s own call transcripts, wrapped as a FastAPI service. On top, I added a fuzzy matching layer fed by an uploadable list of canonical project names. The fuzzy matcher catches close matches deterministically, and the NER model handles anything it misses.',
+    built: "A custom spaCy NER model trained on the company's own call transcripts, wrapped as a FastAPI service. On top, I added a fuzzy matching layer fed by an uploadable list of canonical project names. The fuzzy matcher catches close matches deterministically, and the NER model handles anything it misses.",
     built2: '',
-    result: 'Lifted project-name extraction accuracy from 37% to 84%, enabling per-project cost-of-calling reporting that stakeholders previously didn\'t have.',
+    result: "Lifted project-name extraction accuracy from 37% to 84%, enabling per-project cost-of-calling reporting that stakeholders previously didn't have.",
     stack: ['Python', 'spaCy (Custom NER)', 'FuzzyWuzzy', 'FastAPI', 'Whisper'],
   },
   {
@@ -49,6 +53,7 @@ const projects = [
     title: 'Semantic Search Engine for Restaurant Recommendations',
     tag: 'Semantic Search',
     context: 'Contract role · Shipped to production',
+    summary: 'SBERT + pgvector semantic search matching natural-language queries to restaurants at scale.',
     problem: 'Users type natural-language queries like "cozy ramen spot" or "cheap brunch place" and the system needed to retrieve semantically relevant restaurants, not just keyword matches.',
     built: 'SBERT embeddings represent restaurants and queries in a shared semantic space, stored in pgvector with HNSW indexing for sub-linear approximate nearest-neighbor retrieval at scale. I built an NLP-based noun-pair extraction step that pulls salient (modifier, head) pairs from free-text queries so the embedding step prioritises semantically meaningful tokens over filler words.',
     built2: '',
@@ -63,40 +68,122 @@ const projects = [
     <h2 class="mb-4 text-sm font-medium tracking-wider text-accent uppercase">Selected Work</h2>
     <p class="mb-12 text-gray-400">Projects taken from research to production.</p>
 
-    <div class="space-y-8">
-      {projects.map(project => (
-        <div class="group rounded-2xl border border-border bg-surface p-8 transition-colors hover:border-accent/40">
-          <div class="mb-6">
-            <span class="mr-3 text-3xl font-bold text-accent/40">{project.number}</span>
-            <h3 class="mt-2 text-xl font-bold text-white sm:text-2xl">{project.title}</h3>
-            <span class="mt-3 inline-block rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-medium text-accent">
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {projects.map((project, i) => (
+        <button
+          class="project-card group w-full cursor-pointer rounded-2xl border border-border bg-surface p-6 text-left transition-all hover:border-accent/40"
+          data-index={String(i)}
+        >
+          <div class="mb-4 flex items-center justify-between">
+            <span class="text-2xl font-bold text-accent/40">{project.number}</span>
+            <span class="rounded-full border border-accent/30 bg-accent/10 px-2.5 py-0.5 text-xs font-medium text-accent">
               {project.tag}
             </span>
           </div>
-
-          <p class="mb-4 text-xs font-medium tracking-wider text-gray-500 uppercase">{project.context}</p>
-
-          <div class="mb-6 space-y-4">
-            <p class="text-sm leading-relaxed text-gray-400">{project.problem}</p>
-            <p class="text-sm leading-relaxed text-gray-300">{project.built}</p>
-            {project.built2 && (
-              <p class="text-sm leading-relaxed text-gray-300">{project.built2}</p>
+          <h3 class="mb-1 text-base font-bold leading-snug text-white">{project.title}</h3>
+          <p class="mb-3 text-xs font-medium tracking-wider text-gray-500 uppercase">{project.context}</p>
+          <p class="mb-4 text-sm leading-relaxed text-gray-400">{project.summary}</p>
+          <div class="flex flex-wrap gap-1.5">
+            {project.stack.slice(0, 3).map(tech => (
+              <span class="rounded bg-gray-800 px-2 py-0.5 text-xs text-gray-400">{tech}</span>
+            ))}
+            {project.stack.length > 3 && (
+              <span class="rounded bg-gray-800 px-2 py-0.5 text-xs text-gray-500">+{project.stack.length - 3}</span>
             )}
           </div>
-
-          <div class="mb-6 rounded-lg border border-accent/20 bg-accent/5 px-5 py-3">
-            <p class="text-sm font-medium text-accent-hover">{project.result}</p>
-          </div>
-
-          <div class="flex flex-wrap gap-2">
-            {project.stack.map(tech => (
-              <span class="rounded-md bg-gray-800 px-2.5 py-1 text-xs text-gray-400">
-                {tech}
-              </span>
-            ))}
-          </div>
-        </div>
+          <p class="mt-4 text-right text-xs text-accent/50 transition-colors group-hover:text-accent">View details →</p>
+        </button>
       ))}
     </div>
   </div>
 </section>
+
+<dialog id="project-modal">
+  <div class="rounded-2xl border border-border bg-[#0d1117] p-8 text-white shadow-2xl">
+    <div class="mb-6 flex items-start justify-between gap-4">
+      <div>
+        <div class="mb-2 flex items-center gap-3">
+          <span id="modal-number" class="text-2xl font-bold text-accent/40"></span>
+          <span id="modal-tag" class="rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-medium text-accent"></span>
+        </div>
+        <h3 id="modal-title" class="text-xl font-bold text-white sm:text-2xl"></h3>
+        <p id="modal-context" class="mt-1 text-xs font-medium tracking-wider text-gray-500 uppercase"></p>
+      </div>
+      <button id="modal-close" class="mt-1 shrink-0 text-xl leading-none text-gray-500 transition-colors hover:text-white">✕</button>
+    </div>
+
+    <div class="mb-5 space-y-5">
+      <div>
+        <p class="mb-1.5 text-xs font-semibold tracking-wider text-gray-500 uppercase">Problem</p>
+        <p id="modal-problem" class="text-sm leading-relaxed text-gray-400"></p>
+      </div>
+      <div>
+        <p class="mb-1.5 text-xs font-semibold tracking-wider text-gray-500 uppercase">What I Built</p>
+        <p id="modal-built" class="text-sm leading-relaxed text-gray-300"></p>
+        <p id="modal-built2" class="mt-3 text-sm leading-relaxed text-gray-300"></p>
+      </div>
+    </div>
+
+    <div class="mb-6 rounded-lg border border-accent/20 bg-accent/5 px-5 py-3">
+      <p id="modal-result" class="text-sm font-medium text-accent-hover"></p>
+    </div>
+
+    <div id="modal-stack" class="flex flex-wrap gap-2"></div>
+  </div>
+</dialog>
+
+<style>
+  #project-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    border: none;
+    padding: 0;
+    background: transparent;
+    width: calc(100% - 2rem);
+    max-width: 42rem;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+  #project-modal::backdrop {
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(2px);
+  }
+</style>
+
+<script define:vars={{ projects }}>
+  const modal = document.getElementById('project-modal');
+  const closeBtn = document.getElementById('modal-close');
+
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const p = projects[parseInt(card.dataset.index)];
+
+      document.getElementById('modal-number').textContent = p.number;
+      document.getElementById('modal-tag').textContent = p.tag;
+      document.getElementById('modal-title').textContent = p.title;
+      document.getElementById('modal-context').textContent = p.context;
+      document.getElementById('modal-problem').textContent = p.problem;
+      document.getElementById('modal-built').textContent = p.built;
+
+      const built2El = document.getElementById('modal-built2');
+      built2El.textContent = p.built2;
+      built2El.style.display = p.built2 ? '' : 'none';
+
+      document.getElementById('modal-result').textContent = p.result;
+
+      document.getElementById('modal-stack').innerHTML = p.stack
+        .map(t => `<span class="rounded-md bg-gray-800 px-2.5 py-1 text-xs text-gray-400">${t}</span>`)
+        .join('');
+
+      modal.showModal();
+    });
+  });
+
+  closeBtn.addEventListener('click', () => modal.close());
+  modal.addEventListener('click', e => {
+    if (e.target === modal) modal.close();
+  });
+</script>
