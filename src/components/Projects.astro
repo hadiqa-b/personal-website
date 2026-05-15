@@ -63,10 +63,10 @@ const projects = [
 ];
 ---
 
-<section id="work" class="px-6 py-24">
+<section id="work" class="px-6 py-16">
   <div class="mx-auto max-w-5xl">
-    <h2 class="mb-4 text-sm font-medium tracking-wider text-accent uppercase">Selected Work</h2>
-    <p class="mb-12 text-gray-400">Projects taken from research to production.</p>
+    <h2 class="mb-4 text-center text-base font-bold tracking-wider text-accent uppercase">Selected Work</h2>
+    <p class="mb-12 text-center text-gray-400">Projects taken from research to production.</p>
 
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {projects.map((project, i) => (
@@ -86,7 +86,14 @@ const projects = [
               <span class="rounded bg-gray-800 px-2 py-0.5 text-xs text-gray-400">{tech}</span>
             ))}
             {project.stack.length > 3 && (
-              <span class="rounded bg-gray-800 px-2 py-0.5 text-xs text-gray-500">+{project.stack.length - 3}</span>
+              <span class="stack-extra hidden" data-index={String(i)}>
+                {project.stack.slice(3).map(tech => (
+                  <span class="mr-1.5 mb-1.5 inline-block rounded bg-gray-800 px-2 py-0.5 text-xs text-gray-400">{tech}</span>
+                ))}
+              </span>
+            )}
+            {project.stack.length > 3 && (
+              <span class="stack-toggle-btn rounded bg-gray-800 px-2 py-0.5 text-xs text-accent/60 cursor-pointer hover:text-accent transition-colors" data-index={String(i)} data-state="collapsed">more</span>
             )}
           </div>
           <p class="mt-4 text-right text-xs text-accent/50 transition-colors group-hover:text-accent">View details →</p>
@@ -177,6 +184,23 @@ const projects = [
         .join('');
 
       modal.showModal();
+    });
+  });
+
+  document.querySelectorAll('.stack-toggle-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const idx = btn.dataset.index;
+      const extra = document.querySelector(`.stack-extra[data-index="${idx}"]`);
+      if (btn.dataset.state === 'collapsed') {
+        extra.classList.remove('hidden');
+        btn.textContent = 'less';
+        btn.dataset.state = 'expanded';
+      } else {
+        extra.classList.add('hidden');
+        btn.textContent = 'more';
+        btn.dataset.state = 'collapsed';
+      }
     });
   });
 

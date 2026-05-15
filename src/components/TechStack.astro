@@ -1,42 +1,66 @@
 ---
-const categories = [
-  {
-    name: 'ML & AI',
-    items: ['Python', 'NumPy', 'pandas', 'scikit-learn', 'Reinforcement Learning', 'LangChain', 'OpenAI API', 'spaCy', 'SBERT', 'pgvector', 'K-Means'],
-  },
-  {
-    name: 'Backend & APIs',
-    items: ['FastAPI', 'Uvicorn', 'Pydantic', 'SQLAlchemy', 'PostgreSQL', 'MySQL', 'Alembic', 'Celery', 'Redis', 'WebSocket', 'httpx'],
-  },
-  {
-    name: 'Infrastructure & DevOps',
-    items: ['Docker', 'GitHub Actions', 'PM2', 'New Relic', 'Dynaconf', 'Structured Logging'],
-  },
-  {
-    name: 'Other',
-    items: ['Statistical Testing', 'Bayesian Estimation (MCMC)', 'EDA', 'LLM Prompt Engineering', 'Bilingual NLP', 'R'],
-  },
+const fluent = [
+  'Python', 'Reinforcement Learning', 'LangChain', 'OpenAI API',
+  'FastAPI', 'SQLAlchemy', 'PostgreSQL',
+  'Docker', 'GitHub Actions',
+  'spaCy', 'SBERT', 'pgvector', 'Pydantic',
+  'MySQL', 'Statistical Testing',
+];
+
+const familiar = [
+  'Celery', 'Redis', 'WebSocket', 'New Relic',
+  'K-Means', 'Uvicorn', 'Alembic', 'httpx',
+  'PM2', 'Dynaconf', 'Structured Logging',
+  'LLM Prompt Engineering', 'Bayesian Estimation (MCMC)',
+  'EDA', 'Bilingual NLP', 'PyG', 'NetworkX', 'R',
 ];
 ---
 
-<section id="stack" class="px-6 py-24">
+<section id="stack" class="px-6 py-16">
   <div class="mx-auto max-w-5xl">
-    <h2 class="mb-4 text-sm font-medium tracking-wider text-accent uppercase">Stack</h2>
-    <p class="mb-12 text-gray-400">Technologies I work with regularly.</p>
+    <h2 class="mb-4 text-center text-base font-bold tracking-wider text-accent uppercase">Stack</h2>
+    <p class="mb-8 text-center text-gray-400">Technologies I work with regularly.</p>
 
-    <div class="grid gap-8 sm:grid-cols-2">
-      {categories.map(cat => (
-        <div class="rounded-xl border border-border bg-surface/60 backdrop-blur-sm p-6">
-          <h3 class="mb-4 text-sm font-semibold text-gray-100">{cat.name}</h3>
-          <div class="flex flex-wrap gap-2">
-            {cat.items.map(item => (
-              <span class="rounded-md border border-border bg-gray-800/50 px-3 py-1.5 text-xs text-gray-300">
-                {item}
-              </span>
-            ))}
-          </div>
-        </div>
+    <div class="mb-8 flex justify-center">
+      <div class="inline-flex rounded-lg border border-border bg-surface/60 backdrop-blur-sm p-1">
+        <button id="btn-fluent" class="stack-toggle rounded-md px-5 py-2 text-sm font-medium transition-all bg-accent text-gray-900">Fluent</button>
+        <button id="btn-familiar" class="stack-toggle rounded-md px-5 py-2 text-sm font-medium transition-all text-gray-400 hover:text-gray-200">Familiar</button>
+      </div>
+    </div>
+
+    <div id="stack-fluent" class="flex flex-wrap justify-center gap-2">
+      {fluent.map(item => (
+        <span class="rounded-md border border-border bg-surface/60 backdrop-blur-sm px-3 py-1.5 text-sm text-gray-300">
+          {item}
+        </span>
+      ))}
+    </div>
+
+    <div id="stack-familiar" class="hidden flex flex-wrap justify-center gap-2">
+      {familiar.map(item => (
+        <span class="rounded-md border border-border bg-surface/60 backdrop-blur-sm px-3 py-1.5 text-sm text-gray-300">
+          {item}
+        </span>
       ))}
     </div>
   </div>
 </section>
+
+<script>
+  const btnFluent = document.getElementById('btn-fluent');
+  const btnFamiliar = document.getElementById('btn-familiar');
+  const stackFluent = document.getElementById('stack-fluent');
+  const stackFamiliar = document.getElementById('stack-familiar');
+
+  function activate(active, inactive, showEl, hideEl) {
+    active.classList.add('bg-accent', 'text-gray-900');
+    active.classList.remove('text-gray-400', 'hover:text-gray-200');
+    inactive.classList.remove('bg-accent', 'text-gray-900');
+    inactive.classList.add('text-gray-400', 'hover:text-gray-200');
+    showEl.classList.remove('hidden');
+    hideEl.classList.add('hidden');
+  }
+
+  btnFluent.addEventListener('click', () => activate(btnFluent, btnFamiliar, stackFluent, stackFamiliar));
+  btnFamiliar.addEventListener('click', () => activate(btnFamiliar, btnFluent, stackFamiliar, stackFluent));
+</script>
