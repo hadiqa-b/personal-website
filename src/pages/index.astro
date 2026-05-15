@@ -7,12 +7,14 @@ import Projects from '../components/Projects.astro';
 import TechStack from '../components/TechStack.astro';
 import Publication from '../components/Publication.astro';
 import About from '../components/About.astro';
+import Background from '../components/Background.jsx';
 ---
 
 <Layout
   title="Hadiqa Basit — ML Engineer & Data Scientist"
   description="I build production ML and AI systems that make decisions at scale. Reinforcement learning, LLM agents, NLP, and ML-driven pricing."
 >
+  <Background client:load />
   <Navbar />
   <main>
     <Hero />
