@@ -6,7 +6,7 @@ const projects = [
     tag: 'Reinforcement Learning',
     context: 'Dubizzle Labs · Live across MENA and Pakistan',
     summary: 'RL system matching 30,000 clients to 1,500+ sales agents daily, built from scratch.',
-    problem: 'The company needed a way to intelligently match incoming clients to sales agents. The existing system was a hand-coded scoring policy that concentrated clients on a small set of agents and was painful to change.',
+    problem: "The company needed a way to intelligently match incoming clients to sales agents. The existing system was a static rule-based scoring policy that concentrated clients on a small set of agents and couldn't adapt to changing performance.",
     built: "I pulled production data and found it was falsifiable in places (agents gaming metrics), which ruled out supervised learning. After several failed prototypes and a deep research phase, I designed a contextual multi-armed bandit system, adapting the DiagUCB formulation into a hybrid of UCB and Thompson sampling. The system clusters clients by behavioural scores (evaluated by an LLM), runs three parallel bandits (one per cluster), and produces a final match score weighted by the client's cluster distribution.",
     built2: "I also built the full production service: FastAPI, async SQLAlchemy on MySQL, Celery + Redis for async jobs, New Relic for observability, and Dockerized deploys via GitHub Actions. After launch, I diagnosed that reward events were too rare for meaningful reinforcement, so I decomposed the reward signal into finer-grained events, lifting the reward event rate from 21% to 84%.",
     result: 'Live in production, matching ~30,000 clients across 1,500+ agents daily. The POC presentation drove direct CEO recognition to engineering leadership.',
@@ -65,8 +65,8 @@ const projects = [
 
 <section id="work" class="px-6 py-16">
   <div class="mx-auto max-w-5xl">
-    <h2 class="mb-4 text-center text-base font-bold tracking-wider text-accent uppercase">Selected Work</h2>
-    <p class="mb-12 text-center text-gray-400">Projects taken from research to production.</p>
+    <h2 class="mb-4 text-base font-bold tracking-wider text-accent uppercase">Selected Work</h2>
+    <p class="mb-12 text-gray-400">Projects taken from research to production.</p>
 
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {projects.map((project, i) => (

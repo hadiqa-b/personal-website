@@ -18,17 +18,17 @@ const familiar = [
 
 <section id="stack" class="px-6 py-16">
   <div class="mx-auto max-w-5xl">
-    <h2 class="mb-4 text-center text-base font-bold tracking-wider text-accent uppercase">Stack</h2>
-    <p class="mb-8 text-center text-gray-400">Technologies I work with regularly.</p>
+    <h2 class="mb-4 text-base font-bold tracking-wider text-accent uppercase">Stack</h2>
+    <p class="mb-8 text-gray-400">Technologies I work with regularly.</p>
 
-    <div class="mb-8 flex justify-center">
+    <div class="mb-8 flex">
       <div class="inline-flex rounded-lg border border-border bg-surface/60 backdrop-blur-sm p-1">
         <button id="btn-fluent" class="stack-toggle rounded-md px-5 py-2 text-sm font-medium transition-all bg-accent text-gray-900">Fluent</button>
         <button id="btn-familiar" class="stack-toggle rounded-md px-5 py-2 text-sm font-medium transition-all text-gray-400 hover:text-gray-200">Familiar</button>
       </div>
     </div>
 
-    <div id="stack-fluent" class="flex flex-wrap justify-center gap-2">
+    <div id="stack-fluent" class="flex flex-wrap gap-2">
       {fluent.map(item => (
         <span class="rounded-md border border-border bg-surface/60 backdrop-blur-sm px-3 py-1.5 text-sm text-gray-300">
           {item}
@@ -36,7 +36,7 @@ const familiar = [
       ))}
     </div>
 
-    <div id="stack-familiar" class="hidden flex flex-wrap justify-center gap-2">
+    <div id="stack-familiar" class="hidden flex flex-wrap gap-2">
       {familiar.map(item => (
         <span class="rounded-md border border-border bg-surface/60 backdrop-blur-sm px-3 py-1.5 text-sm text-gray-300">
           {item}
