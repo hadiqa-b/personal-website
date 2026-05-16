@@ -32,7 +32,7 @@ export default function Background() {
           rotationX={0}
           rotationY={10}
           rotationZ={50}
-          color1="#6b2d0f"
+          color1="#522308"
           color2="#4a1a0a"
           color3="#5c1a30"
           reflection={0.1}
@@ -69,7 +69,7 @@ export default function Background() {
           height: '100vh',
           zIndex: -1,
           pointerEvents: 'none',
-          opacity: 0.12,
+          opacity: 0.06,
           mixBlendMode: 'overlay',
           backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
           backgroundSize: '256px 256px',
